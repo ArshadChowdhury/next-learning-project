@@ -3,35 +3,61 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Header = () => {
+
+
+    const linkStyles = {
+        style : "hover:bg-gray-500 hover:text-white cursor-pointer rounded-sm px-5 py-2"
+    }
+
+
   return (
     <>
-      <div className="hidden bg-gray-400 md:flex md:justify-around py-3">
-        <div className="w-1/2">
-          <Image href="/react_logo.png" height="20" width="300" alt="No Image" />
-        </div>
-        <ul className="flex w-1/2 justify-end mr-20">
-          <Link href="/">
-            <li className="hover:bg-gray-500 hover:text-white px-5 py-2 cursor-pointer rounded-sm">Home</li>
-          </Link>
+      <div className="hidden bg-gray-400 md:flex md:justify-around py-4">
+        <Link href="/">
+          <div className="">
+            <Image
+              src="/react_logo.png"
+              height="10"
+              width="30"
+              alt="No Image"
+            />
+          </div>
+        </Link>
+        <ul className="flex w-1/2 justify-end mr-10">
+          <li>
+            <Link
+              className={linkStyles.style}
+              href="/"
+            >
+              Home{" "}
+            </Link>
+          </li>
 
-          <Link href="/login">
-            <li className="hover:bg-gray-500 hover:text-white  px-5 py-2 cursor-pointer rounded-sm">
+          <li>
+            <Link
+              className={linkStyles.style}
+              href="/login"
+            >
               Login
-            </li>
-          </Link>
-          <Link href="/registration">
-            <li className="hover:bg-gray-500 hover:text-white  px-5 py-2 cursor-pointer rounded-sm">
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={linkStyles.style}
+              href="/registration"
+            >
               Registration
-            </li>
-          </Link>
-          <Link href="/blog">
-            <li className="hover:bg-gray-500 hover:text-white  px-5 py-2 cursor-pointer rounded-sm">Blog</li>
-          </Link>
-          <Link href="/contact">
-            <li className="hover:bg-gray-500 hover:text-white  px-5 py-2 cursor-pointer rounded-sm">
-              Contact
-            </li>
-          </Link>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={linkStyles.style}
+              href="/blog"
+            >Blog
+            </Link>
+          </li>
+          <li>
+          <Link className={linkStyles.style} href="/contact">Contact</Link></li>
         </ul>
       </div>
     </>

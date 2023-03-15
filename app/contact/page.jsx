@@ -6,37 +6,32 @@ import * as yup from "yup";
 import Link from "next/link";
 import Header from "../components/Header";
 
-const SignupForm = () => {
+const ContactUs = () => {
   // password rules to check if the password is strong enough
   const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
   // basic yup schema to validate input data and shwoing user errors accrodingly
   const basicRegistrationSchema = yup.object().shape({
-    firstName: yup.string().required("Required"),
-    lastName: yup.string().required("Required"),
+    fullName: yup.string().required("Required"),
     email: yup
       .string()
       .email("Please enter a valid Email Address")
-      .required("Required"),
-    password: yup
+      .optional("Optional"),
+    phone: yup
       .string()
-      .min(5)
-      .matches(passwordRules, { message: "Please create a stronger password" })
+      .min(11, "Please enter a valid Bangladeshi Number")
+      .max(14, "Please enter a valid Bangladeshi Number")
       .required("Required"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match")
-      .required("Required"),
+      message : yup.string().required("Required").min(20, "Message must be at least 20 character long").max(300, "Message must not exceed 300 characters")
   });
 
   // setting up formik here
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+        fullName: "",
+        email: "",
+        phone: "",
+        message: "",
     },
     onSubmit: (values, { resetForm }) => {
       alert(JSON.stringify(values, null, 2));
@@ -49,48 +44,29 @@ const SignupForm = () => {
     <>
       <div className="flex justify-center items-center">
         <div className="h-fit w-full md:w-3/5 flex flex-col items-center">
-          <h1 className="py-10 font-bold text-3xl">Registration</h1>
+          <h1 className="py-10 font-bold text-3xl">Contact Us</h1>
           <div className="bg-gray-300 h-4/5 w-full lg:w-1/2 rounded-md">
             <form
               className="px-7 flex flex-col mt-8"
               onSubmit={formik.handleSubmit}
             >
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="fullName">Full Name</label>
               <input
-                id="firstName"
-                name="firstName"
+                id="fullName"
+                name="fullName"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.firstName}
+                value={formik.values.fullName}
                 className={
-                  formik.errors.firstName && formik.touched.firstName
+                  formik.errors.fullName && formik.touched.fullName
                     ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
                     : "my-1 rounded px-2 py-1 focus:outline-none"
                 }
               />
-              {formik.errors.firstName && formik.touched.firstName && (
+              {formik.errors.fullName && formik.touched.fullName && (
                 <p className="text-red-400 text-sm text-left">
-                  {formik.errors.firstName}
-                </p>
-              )}
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.lastName}
-                className={
-                  formik.errors.lastName && formik.touched.lastName
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
-                }
-              />
-              {formik.errors.lastName && formik.touched.lastName && (
-                <p className="text-red-400 text-sm text-left">
-                  {formik.errors.lastName}
+                  {formik.errors.fullName}
                 </p>
               )}
               <label htmlFor="email">Email Address</label>
@@ -109,49 +85,47 @@ const SignupForm = () => {
               />
               {formik.errors.email && formik.touched.email && (
                 <p className="text-red-400 text-sm text-left">
-                  {formik.errors.email}
+                  {formik.touched.email}
                 </p>
               )}
-              <label htmlFor="password">Password</label>
+              <label htmlFor="phone">Phone Number</label>
               <input
-                id="password"
-                name="password"
-                type="password"
+                id="phone"
+                name="phone"
+                type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.password}
+                value={formik.values.phone}
                 className={
-                  formik.errors.password && formik.touched.password
+                  formik.errors.phone && formik.touched.phone
                     ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
                     : "my-1 rounded px-2 py-1 focus:outline-none"
                 }
               />
-              {formik.errors.password && formik.touched.password && (
+              {formik.errors.phone && formik.touched.phone && (
                 <p className="text-red-400 text-sm text-left">
-                  {formik.errors.password}
+                  {formik.errors.phone}
                 </p>
               )}
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
+              <label htmlFor="message">Your Message</label>
+              <textarea
+                id="message"
+                name="message"
+                type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.confirmPassword}
+                value={formik.values.message}
                 className={
-                  formik.errors.confirmPassword &&
-                  formik.touched.confirmPassword
+                  formik.errors.message && formik.touched.message
                     ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
                     : "my-1 rounded px-2 py-1 focus:outline-none"
                 }
               />
-              {formik.errors.confirmPassword &&
-                formik.touched.confirmPassword && (
-                  <p className="text-red-400 text-sm text-left">
-                    {formik.errors.confirmPassword}
-                  </p>
-                )}
+              {formik.errors.message && formik.touched.message && (
+                <p className="text-red-400 text-sm text-left">
+                  {formik.errors.message}
+                </p>
+              )}
               <button
                 type="submit"
                 className="mt-4 py-2 bg-gray-200 w-1/4 rounded-lg hover:bg-slate-600 hover:text-white"
@@ -172,4 +146,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default ContactUs;

@@ -32,7 +32,7 @@ const SignupForm = () => {
     <>
       <div className="flex justify-center items-center">
         <div className="h-fit w-full md:w-3/5 flex flex-col items-center rounded-md">
-          <h1 className="py-10 font-bold">Login Form</h1>
+          <h1 className="py-10 font-bold text-3xl">Login</h1>
           <div className="bg-gray-300 h-4/5 w-full lg:w-1/2 rounded-md">
             <form
               className="px-7 flex flex-col mt-8"
