@@ -19,7 +19,7 @@ const basicRegistrationSchema = yup.object().shape({
     .required("Required"),
   password: yup
     .string()
-    .min(5)
+    .min(5, "Password must be at least of 5 characters")
     .matches(passwordRules, { message: "Please create a stronger password" })
     .required("Required"),
   confirmPassword: yup

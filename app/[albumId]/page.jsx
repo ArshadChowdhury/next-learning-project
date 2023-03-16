@@ -27,13 +27,13 @@ const AlbumDetails = ({params}) => {
 
   return (
     <div className="flex justify-center items-center">
-    <div className="h-fit w-full md:w-3/5 flex flex-col items-center rounded-md">
+    <div className="h-fit w-full md:w-3/5 flex flex-col items-center rounded-md bg-gray-300 p-20 mt-14">
       <h1 className="py-10 font-bold text-xl">{data.title}</h1>
-      <div className="">
+      <div className="my-5">
         Album Number {params.albumId}
         <div>
-          <p>{data.title}</p>
-          <p>{data.body}</p>
+          <p className='my-4 text-2xl'>{data.title}</p>
+          <p className='text-xl'>{data.body}</p>
         </div>
       </div>
     </div>

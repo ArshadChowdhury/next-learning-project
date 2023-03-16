@@ -32,7 +32,7 @@ export default function Home() {
     <>
       <div className="flex items-center justify-center">
         <div className="h-fit w-full md:w-3/5 flex flex-col items-center">
-          <h1 className="py-10 font-bold text-3xl">Shop Up</h1>
+          <h1 className="py-10 font-bold text-3xl">Shop</h1>
           <div className="self-start">
             {data.map(album => (
               <div key={album.id} className="flex justify-between my-3 bg-gray-300 mx-5 rounded-md">
