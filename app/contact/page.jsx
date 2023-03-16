@@ -3,15 +3,12 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Link from "next/link";
-import Header from "../components/Header";
+import { formInputStyles } from "../components/formInputStyles";
 
-const ContactUs = () => {
-  // password rules to check if the password is strong enough
-  const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+const ContactUsPage = () => {
 
   // basic yup schema to validate input data and shwoing user errors accrodingly
-  const basicRegistrationSchema = yup.object().shape({
+  const basicContactSchema = yup.object().shape({
     fullName: yup.string().required("Required"),
     email: yup
       .string()
@@ -37,8 +34,9 @@ const ContactUs = () => {
       alert(JSON.stringify(values, null, 2));
       resetForm();
     },
-    validationSchema: basicRegistrationSchema,
+    validationSchema: basicContactSchema,
   });
+  
 
   return (
     <>
@@ -60,8 +58,8 @@ const ContactUs = () => {
                 value={formik.values.fullName}
                 className={
                   formik.errors.fullName && formik.touched.fullName
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.fullName && formik.touched.fullName && (
@@ -79,8 +77,8 @@ const ContactUs = () => {
                 value={formik.values.email}
                 className={
                   formik.errors.email && formik.touched.email
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                  ? formInputStyles.errorStyle
+                  : formInputStyles.normalStyle
                 }
               />
               {formik.errors.email && formik.touched.email && (
@@ -96,11 +94,10 @@ const ContactUs = () => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
-                className={
-                  formik.errors.phone && formik.touched.phone
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
-                }
+                className={  formik.errors.phone && formik.touched.phone
+                  ? formInputStyles.errorStyle
+                  : formInputStyles.normalStyle
+                  }
               />
               {formik.errors.phone && formik.touched.phone && (
                 <p className="text-red-400 text-sm text-left">
@@ -116,10 +113,10 @@ const ContactUs = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.message}
                 className={
-                  formik.errors.message && formik.touched.message
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
-                }
+                    formik.errors.message && formik.touched.message
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
+                  }
               />
               {formik.errors.message && formik.touched.message && (
                 <p className="text-red-400 text-sm text-left">
@@ -128,16 +125,10 @@ const ContactUs = () => {
               )}
               <button
                 type="submit"
-                className="mt-4 py-2 bg-gray-200 w-1/4 rounded-lg hover:bg-slate-600 hover:text-white"
+                className="my-4 py-2 bg-gray-200 w-1/4 rounded-lg hover:bg-slate-600 hover:text-white"
               >
                 Submit
               </button>
-              <p className="py-5">
-                Already a member ?{" "}
-                <Link href="/login" className="text-blue-600">
-                  Login here
-                </Link>
-              </p>
             </form>
           </div>
         </div>
@@ -146,4 +137,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default ContactUsPage;

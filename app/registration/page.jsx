@@ -4,30 +4,31 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Link from "next/link";
-import Header from "../components/Header";
+import { formInputStyles } from "../components/formInputStyles";
 
-const SignupForm = () => {
-  // password rules to check if the password is strong enough
-  const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+// password rules to check if the password is strong enough
+const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
-  // basic yup schema to validate input data and shwoing user errors accrodingly
-  const basicRegistrationSchema = yup.object().shape({
-    firstName: yup.string().required("Required"),
-    lastName: yup.string().required("Required"),
-    email: yup
-      .string()
-      .email("Please enter a valid Email Address")
-      .required("Required"),
-    password: yup
-      .string()
-      .min(5)
-      .matches(passwordRules, { message: "Please create a stronger password" })
-      .required("Required"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match")
-      .required("Required"),
-  });
+// basic yup schema to validate input data and shwoing user errors accrodingly
+const basicRegistrationSchema = yup.object().shape({
+  firstName: yup.string().required("Required"),
+  lastName: yup.string().required("Required"),
+  email: yup
+    .string()
+    .email("Please enter a valid Email Address")
+    .required("Required"),
+  password: yup
+    .string()
+    .min(5)
+    .matches(passwordRules, { message: "Please create a stronger password" })
+    .required("Required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .required("Required"),
+});
+
+const RegistrationPage = () => {
 
   // setting up formik here
   const formik = useFormik({
@@ -65,8 +66,8 @@ const SignupForm = () => {
                 value={formik.values.firstName}
                 className={
                   formik.errors.firstName && formik.touched.firstName
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.firstName && formik.touched.firstName && (
@@ -84,8 +85,8 @@ const SignupForm = () => {
                 value={formik.values.lastName}
                 className={
                   formik.errors.lastName && formik.touched.lastName
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.lastName && formik.touched.lastName && (
@@ -103,8 +104,8 @@ const SignupForm = () => {
                 value={formik.values.email}
                 className={
                   formik.errors.email && formik.touched.email
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.email && formik.touched.email && (
@@ -122,8 +123,8 @@ const SignupForm = () => {
                 value={formik.values.password}
                 className={
                   formik.errors.password && formik.touched.password
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.password && formik.touched.password && (
@@ -142,8 +143,8 @@ const SignupForm = () => {
                 className={
                   formik.errors.confirmPassword &&
                   formik.touched.confirmPassword
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.confirmPassword &&
@@ -158,12 +159,12 @@ const SignupForm = () => {
               >
                 Submit
               </button>
-              <p className="py-5">
+              <div className="py-5">
                 Already a member ?{" "}
                 <Link href="/login" className="text-blue-600">
                   Login here
                 </Link>
-              </p>
+              </div>
             </form>
           </div>
         </div>
@@ -172,4 +173,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default RegistrationPage;

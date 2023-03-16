@@ -4,8 +4,10 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Link from "next/link";
+import { formInputStyles } from "../components/formInputStyles";
 
-const SignupForm = () => {
+const LoginPage = () => {
+  
   // basic yup schema to validate input data and shwoing user errors accrodingly
   const basicLoginSchema = yup.object().shape({
     email: yup
@@ -28,6 +30,7 @@ const SignupForm = () => {
     validationSchema: basicLoginSchema,
   });
 
+  
   return (
     <>
       <div className="flex justify-center items-center">
@@ -48,8 +51,8 @@ const SignupForm = () => {
                 value={formik.values.email}
                 className={
                   formik.errors.email && formik.touched.email
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
                 }
               />
               {formik.errors.email && formik.touched.email && (
@@ -67,8 +70,8 @@ const SignupForm = () => {
                 value={formik.values.password}
                 className={
                   formik.errors.password && formik.touched.password
-                    ? "focus:outline-red-400 border-red-400 border-2 mt-1 rounded px-2 py-1"
-                    : "my-1 rounded px-2 py-1 focus:outline-none"
+                  ? formInputStyles.errorStyle
+                  : formInputStyles.normalStyle
                 }
               />
               {formik.errors.password && formik.touched.password && (
@@ -82,12 +85,12 @@ const SignupForm = () => {
               >
                 Submit
               </button>
-              <p className="py-5">
+              <div className="py-5">
                 Not a member ?{" "}
                 <Link href="/registration" className="text-blue-600">
                   Register here
                 </Link>
-              </p>
+              </div>
             </form>
           </div>
         </div>
@@ -96,4 +99,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default LoginPage;
