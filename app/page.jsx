@@ -25,25 +25,27 @@ export default function Home() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="my-10 mx-14">Loading...</div>;
   }
 
-  return (
-    <>
-      <div className="flex items-center justify-center">
-        <div className="h-fit w-full md:w-3/5 flex flex-col items-center">
-          <h1 className="py-10 font-bold text-3xl">Shop</h1>
-          <div className="self-start">
-            {data.map(album => (
-              <div key={album.id} className="flex justify-between my-3 bg-gray-300 mx-5 rounded-md">
-                <h1 className="text-xl font-semibold my-2 mx-10">{album.title}</h1>
-                <Link className="my-2 mx-10 text-gray-900 font-bold underline min-w-fit" href={`/${album.id}`}>View Details</Link>
-              </div>
-            ))}
-            
+
+    return (
+      <>
+        <div className="flex items-center justify-center">
+          <div className="h-fit w-fit flex flex-col items-center">
+            <h1 className="py-10 font-bold text-3xl">Shop</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+              {data.map(album => (
+                <div key={album.id} className="flex justify-between m-3 bg-gray-300 rounded-md">
+                  <h1 className="text-xl font-normal p-4 break-words max-w-fit">{album.title}</h1>
+                  <Link className="py-4 px-3 text-gray-900 font-medium underline min-w-fit" href={`/${album.id}`}>View Details</Link>
+                </div>
+              ))}
+              
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-}
+      </>
+    )
+
+  }
