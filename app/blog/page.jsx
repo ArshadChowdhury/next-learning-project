@@ -11,7 +11,6 @@ const BlogPage = () => {
       try {
         const res = await fetch("https://jsonplaceholder.typicode.com/posts");
         const data = await res.json();
-        console.log(data);
         return data;
       } catch (error) {
         console.log(error);
@@ -20,24 +19,30 @@ const BlogPage = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="my-10 mx-14">Loading...</div>;
   }
 
   return (
     <div className="flex flex-col">
       <h1 className="py-10 font-bold text-3xl self-center">Blog</h1>
-      {data?.map((item) => (
-        <div
-          key={item.id}
-          className="h-fit flex flex-col p-5 my-3 bg-gray-300 mx-5 rounded-md"
-        >
-          <div className="flex justify-between">
-            <h1 className="font-semibold my-2">{item.title}</h1>
-            <Link className="my-2 mx-10 text-gray-900 font-bold underline" href={`/blog/${item.id}`}>View Details</Link>
+      <div className="rounded-lg grid grid-cols-1 md:grid-cols-2">
+        {data?.map((item) => (
+          <div key={item.id} className="flex justify-between m-3 bg-gray-300 rounded-md">
+            <div className="flex flex-col p-4">
+            <div className="flex justify-between my-3">
+              <h1 className="font-semibold">{item.title}</h1>
+              <Link
+                className="text-gray-900 font-bold underline min-w-fit"
+                href={`/blog/${item.id}`}
+              >
+                View Details
+              </Link>
+              </div>
+              <p>{item.body}</p>
           </div>
-          <p>{item.body}</p>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

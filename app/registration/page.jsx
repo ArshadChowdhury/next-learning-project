@@ -26,10 +26,13 @@ const basicRegistrationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
+  profileImage:yup.mixed().test("fileSize", "The file is too large", (value) => {
+      if (!value.length) return true // attachment is optional
+      return value[0].size <= 2000000
+    }),
 });
 
 const RegistrationPage = () => {
-
   // setting up formik here
   const formik = useFormik({
     initialValues: {
@@ -38,6 +41,7 @@ const RegistrationPage = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      profileImage: "",
     },
     onSubmit: (values, { resetForm }) => {
       alert(JSON.stringify(values, null, 2));
@@ -153,6 +157,26 @@ const RegistrationPage = () => {
                     {formik.errors.confirmPassword}
                   </p>
                 )}
+              <label htmlFor="profileImage">Profile Picture</label>
+              <input
+                id="profileImage"
+                name="profileImage"
+                type="file"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.firstName}
+                className={
+                  formik.errors.firstName && formik.touched.firstName
+                    ? formInputStyles.errorStyle
+                    : formInputStyles.normalStyle
+                }
+              />
+              {formik.errors.firstName && formik.touched.firstName && (
+                <p className="text-red-400 text-sm text-left">
+                  {formik.errors.firstName}
+                </p>
+              )}
+
               <button
                 type="submit"
                 className="mt-4 py-2 bg-gray-200 w-1/4 rounded-lg hover:bg-slate-600 hover:text-white"

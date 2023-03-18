@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       <body>
       <QueryClientProvider client={queryClient}>
         <Header />
-        <div className='min-h-screen'>
+        <div className='min-h-screen bg-gradient-to-r from-gray-200 via-cyan-200 to-zinc-300 md:bg-gradient-to-r md:from-slate-100'>
         {children}
         </div>
         {/* <ReactQueryDevtools/> */}
