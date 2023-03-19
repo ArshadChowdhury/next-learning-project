@@ -26,10 +26,22 @@ const basicRegistrationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
-  profileImage:yup.mixed().test("fileSize", "The file is too large", (value) => {
-      if (!value.length) return true // attachment is optional
-      return value[0].size <= 2000000
-    }),
+  profileImage: yup.object().shape({
+    files: yup.array()
+      .nullable()
+      .required('Image is required')
+      .test('is-correct-file', 'VALIDATION_FIELD_FILE_BIG', value => {
+        console.log(value);
+        value && value[0].size <= 2000000
+      })
+      .test(
+        'is-big-file',
+        'VALIDATION_FIELD_FILE_WRONG_TYPE', value => {
+          console.log(value);
+          value && value[0].size <= 2000000
+        }
+      ),
+})
 });
 
 const RegistrationPage = () => {
@@ -47,7 +59,7 @@ const RegistrationPage = () => {
       alert(JSON.stringify(values, null, 2));
       resetForm();
     },
-    validationSchema: basicRegistrationSchema,
+    // validationSchema: basicRegistrationSchema,
   });
 
   return (
@@ -164,16 +176,16 @@ const RegistrationPage = () => {
                 type="file"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.firstName}
+                value={formik.values.profileImage}
                 className={
-                  formik.errors.firstName && formik.touched.firstName
+                  formik.errors.profileImage && formik.touched.profileImage
                     ? formInputStyles.errorStyle
                     : formInputStyles.normalStyle
                 }
               />
-              {formik.errors.firstName && formik.touched.firstName && (
+              {formik.errors.profileImage && formik.touched.profileImage && (
                 <p className="text-red-400 text-sm text-left">
-                  {formik.errors.firstName}
+                  {formik.errors.profileImage}
                 </p>
               )}
 
