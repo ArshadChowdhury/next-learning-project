@@ -4,7 +4,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Link from "next/link";
-import { formInputStyles } from "../components/formInputStyles";
+import { formInputStyles } from "../../components/formInputStyles";
 
 // password rules to check if the password is strong enough
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
@@ -26,22 +26,6 @@ const basicRegistrationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
-  profileImage: yup.object().shape({
-    files: yup.array()
-      .nullable()
-      .required('Image is required')
-      .test('is-correct-file', 'VALIDATION_FIELD_FILE_BIG', value => {
-        console.log(value);
-        value && value[0].size <= 2000000
-      })
-      .test(
-        'is-big-file',
-        'VALIDATION_FIELD_FILE_WRONG_TYPE', value => {
-          console.log(value);
-          value && value[0].size <= 2000000
-        }
-      ),
-})
 });
 
 const RegistrationPage = () => {
@@ -59,7 +43,7 @@ const RegistrationPage = () => {
       alert(JSON.stringify(values, null, 2));
       resetForm();
     },
-    // validationSchema: basicRegistrationSchema,
+    validationSchema: basicRegistrationSchema,
   });
 
   return (

@@ -4,7 +4,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Link from "next/link";
-import { formInputStyles } from "../components/formInputStyles";
+import { formInputStyles } from "../../components/formInputStyles";
 
 const LoginPage = () => {
   

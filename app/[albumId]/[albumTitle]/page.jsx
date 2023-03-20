@@ -2,17 +2,18 @@
 
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 
-const AlbumDetails = ({ params }) => {
+const AlbumTitle = ({ params }) => {
+  console.log(params);
   const { data, isLoading } = useQuery({
-    queryKey: ["album"],
+    queryKey: ["albumTitle"],
     queryFn: async () => {
       try {
         const res = await fetch(
-          `https://jsonplaceholder.typicode.com/posts/${params.albumId}`
+          `https://jsonplaceholder.typicode.com/posts/${params.albumId}/comments`
         );
         const data = await res.json();
+        console.log(data);
         return data;
       } catch (error) {
         console.log(error);
@@ -28,19 +29,22 @@ const AlbumDetails = ({ params }) => {
     <div className="flex justify-center items-center">
       <div className="h-fit w-full md:w-3/5 flex flex-col items-center rounded-md bg-gray-300 p-20 mt-14">
         <h1 className="py-10 font-bold text-xl">{data.title}</h1>
-        <div className="my-5">
-          Album Number {params.albumId}
-          <div>
-            <p className="my-4 text-2xl">{data.title}</p>
-            <p className="text-xl">{data.body}</p>
-          </div>
+        <div className="my-10">
+          Album Number - {params.albumId}
+          {data.map((soloAlbum) => (
+            <div
+              key={soloAlbum.id}
+              className="bg-slate-100 my-3 p-4 rounded-md"
+            >
+              <p className="text-md">User Name - {soloAlbum.name}</p>
+              <p className="text-md">User Email - {soloAlbum.email}</p>
+              <p className="text-md my-4">Comment - {soloAlbum.body}</p>
+            </div>
+          ))}
         </div>
-        <Link href={`/${params.albumId}/comments`} className="underline">
-          Comments
-        </Link>
       </div>
     </div>
   );
 };
 
-export default AlbumDetails;
+export default AlbumTitle;
