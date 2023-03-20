@@ -8,6 +8,7 @@ First, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-There are some routes, some are dynamic some are static.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. <br>
+
+There are some routes, some are dynamic some are static. Static components are kept outside of the app folder, only the things rendered in server side is kept in app directory.
 
