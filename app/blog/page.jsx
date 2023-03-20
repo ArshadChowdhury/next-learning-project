@@ -2,6 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+<<<<<<< HEAD
+=======
+import Link from "next/link";
+>>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab
 import ViewDetails from "../../components/ViewDetails";
 
 const BlogPage = () => {
@@ -27,15 +31,26 @@ const BlogPage = () => {
       <h1 className="py-10 font-bold text-3xl self-center">Blog</h1>
       <div className="rounded-lg grid grid-cols-1 md:grid-cols-2">
         {data?.map((item) => (
-          <div key={item.id} className="flex justify-between m-3 bg-gray-300 rounded-md">
+          <div
+            key={item.id}
+            className="flex justify-between m-3 bg-gray-300 rounded-md"
+          >
             <div className="flex flex-col p-4">
+<<<<<<< HEAD
             <div className="flex justify-between my-3">
               <h1 className="font-semibold">{item.title}</h1>
               <ViewDetails classStyle={"text-gray-900 font-bold underline min-w-fit"} href={`/blog/${item.id}`}
+=======
+              <div className="flex justify-between my-3">
+                <h1 className="font-semibold">{item.title}</h1>
+                <ViewDetails
+                  classStyle={"text-gray-900 font-bold underline min-w-fit"}
+                  href={`/blog/${item.id}`}
+>>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab
                 />
               </div>
               <p>{item.body}</p>
-          </div>
+            </div>
           </div>
         ))}
       </div>

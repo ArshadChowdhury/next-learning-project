@@ -4,6 +4,10 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
 const AlbumTitle = ({ params }) => {
+<<<<<<< HEAD
+=======
+  console.log(params);
+>>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab
   const { data, isLoading } = useQuery({
     queryKey: ["albumTitle"],
     queryFn: async () => {
@@ -46,4 +50,8 @@ const AlbumTitle = ({ params }) => {
   );
 };
 
+<<<<<<< HEAD
 export default AlbumTitle;
+=======
+export default AlbumTitle;
+>>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab

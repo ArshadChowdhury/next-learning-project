@@ -26,6 +26,7 @@ const basicRegistrationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
+<<<<<<< HEAD
   profileImage: yup.array()
       .nullable()
       .required('Image is required')
@@ -38,6 +39,8 @@ const basicRegistrationSchema = yup.object().shape({
           value && value[0].size <= 2000000
         }
       )
+=======
+>>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab
 });
 
 const RegistrationPage = () => {

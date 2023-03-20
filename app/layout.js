@@ -1,7 +1,12 @@
 "use client"
 
+<<<<<<< HEAD
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+=======
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+>>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab
 import {
   QueryClient,
   QueryClientProvider,

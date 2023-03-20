@@ -24,7 +24,6 @@ const AlbumDetails = ({ params }) => {
     return <div className="my-10 mx-14">Loading...</div>;
   }
 
-
   return (
     <div className="flex justify-center items-center">
       <div className="h-fit w-full md:w-3/5 flex flex-col items-center rounded-md bg-gray-300 p-20 mt-14">
