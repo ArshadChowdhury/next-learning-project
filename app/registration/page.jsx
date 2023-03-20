@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { useFormik } from "formik";
+import { useFormik, set } from "formik";
 import * as yup from "yup";
 import Link from "next/link";
-import { formInputStyles } from "../components/formInputStyles";
+import { formInputStyles } from "../../components/formInputStyles";
 
 // password rules to check if the password is strong enough
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
@@ -26,22 +26,18 @@ const basicRegistrationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
-  profileImage: yup.object().shape({
-    files: yup.array()
+  profileImage: yup.array()
       .nullable()
       .required('Image is required')
-      .test('is-correct-file', 'VALIDATION_FIELD_FILE_BIG', value => {
-        console.log(value);
-        value && value[0].size <= 2000000
+      .test('fileFormat', 'Please insert an image in .jpg/.jpeg/.png format', value => {
+        ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'].includes(value[0].type)
       })
       .test(
-        'is-big-file',
-        'VALIDATION_FIELD_FILE_WRONG_TYPE', value => {
-          console.log(value);
+        'fileSize',
+        'Please insert a smaller size Image', value => {
           value && value[0].size <= 2000000
         }
-      ),
-})
+      )
 });
 
 const RegistrationPage = () => {
@@ -59,7 +55,7 @@ const RegistrationPage = () => {
       alert(JSON.stringify(values, null, 2));
       resetForm();
     },
-    // validationSchema: basicRegistrationSchema,
+    validationSchema: basicRegistrationSchema,
   });
 
   return (
@@ -174,7 +170,9 @@ const RegistrationPage = () => {
                 id="profileImage"
                 name="profileImage"
                 type="file"
-                onChange={formik.handleChange}
+                onChange={(event) => {
+                  formik.setValue(profileImage, event.target.files[0])
+                }}
                 onBlur={formik.handleBlur}
                 value={formik.values.profileImage}
                 className={

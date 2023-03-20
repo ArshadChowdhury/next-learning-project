@@ -3,6 +3,7 @@
 import { Inter } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import ViewDetails from "../components/ViewDetails";
 
 
 
@@ -38,7 +39,7 @@ export default function Home() {
               {data.map(album => (
                 <div key={album.id} className="flex justify-between m-3 bg-gray-300 rounded-md">
                   <h1 className="text-xl font-normal p-4 break-words max-w-fit">{album.title}</h1>
-                  <Link className="py-4 px-3 text-gray-900 font-medium underline min-w-fit" href={`/${album.id}`}>View Details</Link>
+                  <ViewDetails href={`/${album.id}`} classStyle={"py-4 px-3 text-gray-900 font-medium underline min-w-fit"} />
                 </div>
               ))}
               

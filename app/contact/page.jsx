@@ -3,7 +3,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { formInputStyles } from "../components/formInputStyles";
+import { formInputStyles } from "../../components/formInputStyles";
 
 const ContactUsPage = () => {
 

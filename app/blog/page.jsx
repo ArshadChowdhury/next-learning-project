@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import Link from "next/link";
+import ViewDetails from "../../components/ViewDetails";
 
 const BlogPage = () => {
   const { data, isLoading } = useQuery({
@@ -31,12 +31,8 @@ const BlogPage = () => {
             <div className="flex flex-col p-4">
             <div className="flex justify-between my-3">
               <h1 className="font-semibold">{item.title}</h1>
-              <Link
-                className="text-gray-900 font-bold underline min-w-fit"
-                href={`/blog/${item.id}`}
-              >
-                View Details
-              </Link>
+              <ViewDetails classStyle={"text-gray-900 font-bold underline min-w-fit"} href={`/blog/${item.id}`}
+                />
               </div>
               <p>{item.body}</p>
           </div>
