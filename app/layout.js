@@ -10,12 +10,6 @@ import './globals.css';
 
 const queryClient = new QueryClient();
 
-export const metadata = {
-  title: 'Demo E-commerce App',
-  description: 'This is a dummy E-commerce app',
-}
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
