@@ -26,21 +26,6 @@ const basicRegistrationSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Required"),
-<<<<<<< HEAD
-  profileImage: yup.array()
-      .nullable()
-      .required('Image is required')
-      .test('fileFormat', 'Please insert an image in .jpg/.jpeg/.png format', value => {
-        ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'].includes(value[0].type)
-      })
-      .test(
-        'fileSize',
-        'Please insert a smaller size Image', value => {
-          value && value[0].size <= 2000000
-        }
-      )
-=======
->>>>>>> 7c871fe9beaaedb5b5a7b4a67a9396b3973fd9ab
 });
 
 const RegistrationPage = () => {
